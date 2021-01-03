@@ -1,6 +1,7 @@
 import React from "react";
 import ItemBlock from "./ItemBlock";
 import Position from "../../data/common/Position";
+import GridUtil from "../../util/GridUtil";
 
 class Item extends React.Component {
   constructor(props) {
@@ -19,7 +20,6 @@ class Item extends React.Component {
     this.getFittedPostion = this.getFittedPostion.bind(this);
     this.highlightCells = this.highlightCells.bind(this);
     this.unHighlightCells = this.unHighlightCells.bind(this);
-    this.checkFit = this.checkFit.bind(this);
     this.getUpperLeftGridCell = this.getUpperLeftGridCell.bind(this);
 
     this.state = {
@@ -31,7 +31,14 @@ class Item extends React.Component {
     this.selectedBlock = block;
 
     if (this.fittedCell) {
-      this.props.setGridState(this.fittedCell, this.props.shapeDefinition, 0);
+      this.props.setGridState(
+        GridUtil.resetShapeValues(
+          this.props.getGridState(),
+          this.props.shapeDefinition,
+          this.fittedCell[0],
+          this.fittedCell[1]
+        )
+      );
 
       this.fittedCell = null;
     }
@@ -80,19 +87,37 @@ class Item extends React.Component {
 
     let upperLeftCell = this.getUpperLeftGridCell(e);
 
-    if (upperLeftCell && this.checkFit(upperLeftCell)) {
+    if (
+      upperLeftCell &&
+      GridUtil.checkFit(
+        this.props.getGridState(),
+        this.props.shapeDefinition,
+        upperLeftCell[0],
+        upperLeftCell[1]
+      )
+    ) {
       this.highlightedCell = upperLeftCell;
 
-      this.props.setGridState(upperLeftCell, this.props.shapeDefinition, 1);
+      this.props.setGridState(
+        GridUtil.highlightShape(
+          this.props.getGridState(),
+          this.props.shapeDefinition,
+          upperLeftCell[0],
+          upperLeftCell[1]
+        )
+      );
     }
   }
 
   unHighlightCells() {
     if (this.highlightedCell) {
       this.props.setGridState(
-        this.highlightedCell,
-        this.props.shapeDefinition,
-        0
+        GridUtil.resetShapeValues(
+          this.props.getGridState(),
+          this.props.shapeDefinition,
+          this.highlightedCell[0],
+          this.highlightedCell[1]
+        )
       );
 
       this.highlightedCell = null;
@@ -102,41 +127,33 @@ class Item extends React.Component {
   getFittedPostion(e) {
     let upperLeftCell = this.getUpperLeftGridCell(e);
 
-    if (!upperLeftCell || !this.checkFit(upperLeftCell)) {
+    if (
+      !upperLeftCell ||
+      !GridUtil.checkFit(
+        this.props.getGridState(),
+        this.props.shapeDefinition,
+        upperLeftCell[0],
+        upperLeftCell[1]
+      )
+    ) {
       return this.props.restPosition;
     }
 
     this.fittedCell = upperLeftCell;
 
-    this.props.setGridState(upperLeftCell, this.props.shapeDefinition, 2);
+    this.props.setGridState(
+      GridUtil.fitShape(
+        this.props.getGridState(),
+        this.props.shapeDefinition,
+        upperLeftCell[0],
+        upperLeftCell[1]
+      )
+    );
 
     return new Position(
       50 + upperLeftCell[0] * 50,
       100 + 8 * 50 + upperLeftCell[1] * 50
     );
-  }
-
-  checkFit(upperLeftCell) {
-    let gridState = this.props.getGridState();
-
-    for (let position of this.props.shapeDefinition.definition) {
-      let cell = [
-        upperLeftCell[0] + position[0],
-        upperLeftCell[1] + position[1],
-      ];
-
-      if (
-        cell[0] < 0 ||
-        cell[0] >= 10 ||
-        cell[1] < 0 ||
-        cell[1] >= 10 ||
-        gridState[cell[0]][cell[1]] === 2
-      ) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   getUpperLeftGridCell(e) {

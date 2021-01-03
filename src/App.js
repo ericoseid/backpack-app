@@ -24,6 +24,7 @@ class App extends React.Component {
 
     this.state = {
       itemState: items,
+      backpackGrid: backpackGrid,
       gridState: backpackGrid.state,
       gridPosition: backpackGrid.position,
     };
@@ -37,37 +38,17 @@ class App extends React.Component {
     ];
   }
 
-  buildGridState() {
-    let gridState = [];
-
-    for (let i = 0; i < 10; i++) {
-      let row = [];
-      for (let j = 0; j < 10; j++) {
-        row.push(0);
-      }
-
-      gridState.push(row);
-    }
-
-    return gridState;
-  }
-
   getGridState() {
-    return this.state.gridState;
+    return this.state.backpackGrid.state;
   }
 
-  setGridState(upperLeftCell, shapeDefinition, value) {
-    let gridState = this.getGridState();
+  setGridState(gridState) {
+    let backpackGrid = this.state.backpackGrid;
 
-    for (let position of shapeDefinition.definition) {
-      let row = upperLeftCell[0] + position[0];
-      let column = upperLeftCell[1] + position[1];
-
-      gridState[row][column] = value;
-    }
+    backpackGrid.state = gridState;
 
     this.setState({
-      gridState: gridState,
+      backpackGrid: backpackGrid,
     });
   }
 
@@ -82,10 +63,7 @@ class App extends React.Component {
             setGridState={this.setGridState}
           />
         ))}
-        <Grid
-          upperLeftPosition={this.state.gridPosition}
-          gridState={this.state.gridState}
-        />
+        <Grid gridData={this.state.backpackGrid} />
       </div>
     );
   }
