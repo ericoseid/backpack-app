@@ -1,7 +1,8 @@
 export default class GridData {
-  constructor(position, rows, columns) {
+  constructor(position, rows, columns, type) {
     this.position = position;
     this.state = this.buildState(rows, columns);
+    this.type = type;
   }
 
   buildState(rows, columns) {
@@ -18,4 +19,7 @@ export default class GridData {
 
     return gridState;
   }
+
+  static GROUND_TYPE = "ground";
+  static BACKPACK_TYPE = "backpack";
 }

@@ -11,6 +11,7 @@ function GridBlock(props) {
       }}
       data-row={props.row}
       data-column={props.column}
+      data-type={props.type}
     ></div>
   );
 }

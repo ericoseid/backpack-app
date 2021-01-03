@@ -7,6 +7,7 @@ function GridRow(props) {
       cellState={value}
       row={props.row}
       column={i}
+      type={props.type}
     />
   ));
 }

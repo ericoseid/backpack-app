@@ -8,6 +8,7 @@ function Grid(props) {
           upperLeftPosition={props.gridData.position}
           rowState={row}
           row={i}
+          type={props.gridData.type}
         />
       ))}
     </div>

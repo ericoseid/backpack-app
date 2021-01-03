@@ -2,6 +2,7 @@ import React from "react";
 import ItemBlock from "./ItemBlock";
 import Position from "../../data/common/Position";
 import GridUtil from "../../util/GridUtil";
+import GridData from "../../data/grid/GridData";
 
 class Item extends React.Component {
   constructor(props) {
@@ -152,7 +153,7 @@ class Item extends React.Component {
 
     return new Position(
       50 + upperLeftCell[0] * 50,
-      100 + 8 * 50 + upperLeftCell[1] * 50
+      this.props.backpackPosition.left + upperLeftCell[1] * 50
     );
   }
 
@@ -163,7 +164,10 @@ class Item extends React.Component {
 
     let hoveredElements = document.elementsFromPoint(e.clientX, e.clientY);
 
-    let gridBlock = hoveredElements.find((e) => e.className === "GridBlock");
+    let gridBlock = hoveredElements.find(
+      (e) =>
+        e.className === "GridBlock" && e.dataset.type == GridData.BACKPACK_TYPE
+    );
 
     if (gridBlock) {
       return [

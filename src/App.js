@@ -15,18 +15,36 @@ class App extends React.Component {
     this.getGridState = this.getGridState.bind(this);
     this.setGridState = this.setGridState.bind(this);
 
+    let centerPoint = document.defaultView.window.screen.width / 2;
+    let widthFromCenter = 40;
+
+    let backpackWidth = 10;
+    let backpackHeight = 10;
+
+    this.backpackLeft = centerPoint + widthFromCenter;
+    this.groundLeft = centerPoint - widthFromCenter - backpackWidth * 50;
+
     let items = this.buildItemState();
-    let groundGrid = new GridData(new Position(50, 50), 8, 8);
+    let groundGrid = new GridData(
+      new Position(50, this.groundLeft),
+      backpackWidth,
+      backpackHeight,
+      GridData.GROUND_TYPE
+    );
 
     GridUtil.fitItems(groundGrid, items);
 
-    let backpackGrid = new GridData(new Position(50, 100 + 8 * 50), 10, 10);
+    let backpackGrid = new GridData(
+      new Position(50, this.backpackLeft),
+      backpackWidth,
+      backpackHeight,
+      GridData.BACKPACK_TYPE
+    );
 
     this.state = {
       itemState: items,
+      groundGrid: groundGrid,
       backpackGrid: backpackGrid,
-      gridState: backpackGrid.state,
-      gridPosition: backpackGrid.position,
     };
   }
 
@@ -59,10 +77,12 @@ class App extends React.Component {
           <Item
             restPosition={item.position}
             shapeDefinition={item.shapeDefinition}
+            backpackPosition={new Position(50, this.backpackLeft)}
             getGridState={this.getGridState}
             setGridState={this.setGridState}
           />
         ))}
+        <Grid gridData={this.state.groundGrid} />
         <Grid gridData={this.state.backpackGrid} />
       </div>
     );
