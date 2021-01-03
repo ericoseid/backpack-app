@@ -1,6 +1,6 @@
 class ItemData {
-  constructor(restPosition, shapeDefinition) {
-    this.restPosition = restPosition;
+  constructor(shapeDefinition) {
+    this.position = null;
     this.shapeDefinition = shapeDefinition;
   }
 }

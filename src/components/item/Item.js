@@ -112,7 +112,7 @@ class Item extends React.Component {
 
     return new Position(
       50 + upperLeftCell[0] * 50,
-      300 + upperLeftCell[1] * 50
+      100 + 8 * 50 + upperLeftCell[1] * 50
     );
   }
 
