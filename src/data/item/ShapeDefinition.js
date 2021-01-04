@@ -1,3 +1,5 @@
+import ShapeBlockDefinition from "./ShapeBlockDefinition";
+
 class ShapeDefinition {
   constructor(definition, id) {
     this.id = id;
@@ -6,27 +8,27 @@ class ShapeDefinition {
 
   static LINE = new ShapeDefinition(
     [
-      [0, 0],
-      [1, 0],
-      [2, 0],
+      new ShapeBlockDefinition(0, 0, true, false, true, true),
+      new ShapeBlockDefinition(1, 0, false, false, true, true),
+      new ShapeBlockDefinition(2, 0, false, true, true, true),
     ],
     0
   );
   static SQUARE = new ShapeDefinition(
     [
-      [0, 0],
-      [0, 1],
-      [1, 0],
-      [1, 1],
+      new ShapeBlockDefinition(0, 0, true, false, true, false),
+      new ShapeBlockDefinition(0, 1, true, false, false, true),
+      new ShapeBlockDefinition(1, 0, false, true, true, false),
+      new ShapeBlockDefinition(1, 1, false, true, false, true),
     ],
     2
   );
   static L = new ShapeDefinition(
     [
-      [0, 0],
-      [1, 0],
-      [2, 0],
-      [2, 1],
+      new ShapeBlockDefinition(0, 0, true, false, true, true),
+      new ShapeBlockDefinition(1, 0, false, false, true, true),
+      new ShapeBlockDefinition(2, 0, false, true, true, false),
+      new ShapeBlockDefinition(2, 1, true, true, false, true),
     ],
     1
   );

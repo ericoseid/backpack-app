@@ -31,14 +31,14 @@ let GridUtil = {
 
   checkFit: (gridState, shape, row, column) => {
     for (let position of shape.definition) {
-      let curRow = row + position[0];
-      let curColumn = column + position[1];
+      let curRow = row + position.down;
+      let curColumn = column + position.right;
 
       if (
         curRow < 0 ||
-        curRow >= gridState.len ||
+        curRow >= gridState.length ||
         curColumn < 0 ||
-        curColumn >= gridState[0].len ||
+        curColumn >= gridState[0].length ||
         gridState[curRow][curColumn] === 2
       ) {
         return false;
@@ -62,7 +62,7 @@ let GridUtil = {
 
   setValuesForShape: (gridState, shape, row, column, value) => {
     for (let position of shape.definition) {
-      gridState[row + position[0]][column + position[1]] = value;
+      gridState[row + position.down][column + position.right] = value;
     }
 
     return gridState;

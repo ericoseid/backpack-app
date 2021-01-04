@@ -24,7 +24,8 @@ class App extends React.Component {
     this.backpackLeft = centerPoint + widthFromCenter;
     this.groundLeft = centerPoint - widthFromCenter - backpackWidth * 50;
 
-    let items = this.buildItemState();
+    let items = this.buildItemState().sort(ItemData.ITEM_COMPARATOR);
+
     let groundGrid = new GridData(
       new Position(50, this.groundLeft),
       backpackWidth,

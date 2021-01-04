@@ -171,8 +171,8 @@ class Item extends React.Component {
 
     if (gridBlock) {
       return [
-        gridBlock.dataset.row - itemBlockPosition[0],
-        gridBlock.dataset.column - itemBlockPosition[1],
+        gridBlock.dataset.row - itemBlockPosition.down,
+        gridBlock.dataset.column - itemBlockPosition.right,
       ];
     }
 
@@ -187,15 +187,15 @@ class Item extends React.Component {
             style={{
               position: "absolute",
               zIndex: this.selectedBlock !== null ? 2 : 1,
-              top: `${this.state.currentPostion.top + position[0] * 50}px`,
-              left: `${this.state.currentPostion.left + position[1] * 50}px`,
+              top: `${this.state.currentPostion.top + position.down * 50}px`,
+              left: `${this.state.currentPostion.left + position.right * 50}px`,
             }}
             onMouseDown={(e) => this.onMouseDown(i, e)}
             onMouseUp={this.onMouseUp}
             onMouseMove={this.onMouseMove}
             onMouseLeave={this.onMouseLeave}
           >
-            <ItemBlock />
+            <ItemBlock definition={position} />
           </div>
         ))}
       </div>
