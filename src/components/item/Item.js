@@ -3,6 +3,7 @@ import ItemBlock from "./ItemBlock";
 import Position from "../../data/common/Position";
 import GridUtil from "../../util/GridUtil";
 import GridData from "../../data/grid/GridData";
+import sword from "../../assets/sword.png";
 
 class Item extends React.Component {
   constructor(props) {
@@ -181,14 +182,22 @@ class Item extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          position: "absolute",
+          top: `${this.state.currentPostion.top}px`,
+          left: `${this.state.currentPostion.left}px`,
+          zIndex: 1,
+        }}
+      >
+        <img src={sword} alt="" height="150px" width="50px" />
         {this.props.shapeDefinition.definition.map((position, i) => (
           <div
             style={{
               position: "absolute",
-              zIndex: this.selectedBlock !== null ? 2 : 1,
-              top: `${this.state.currentPostion.top + position.down * 50}px`,
-              left: `${this.state.currentPostion.left + position.right * 50}px`,
+              zIndex: this.selectedBlock !== null ? 3 : 2,
+              top: `${position.down * 50}px`,
+              left: `${position.right * 50}px`,
             }}
             onMouseDown={(e) => this.onMouseDown(i, e)}
             onMouseUp={this.onMouseUp}

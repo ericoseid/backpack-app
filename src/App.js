@@ -7,6 +7,7 @@ import ShapeDefinition from "./data/item/ShapeDefinition";
 import Grid from "./components/grid/Grid";
 import GridData from "./data/grid/GridData";
 import GridUtil from "./util/GridUtil";
+import getConfiguration from "./util/ConfigurationUtil";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,10 +17,13 @@ class App extends React.Component {
     this.setGridState = this.setGridState.bind(this);
 
     let centerPoint = document.defaultView.window.screen.width / 2;
-    let widthFromCenter = 40;
 
-    let backpackWidth = 10;
-    let backpackHeight = 10;
+    let configuration = getConfiguration().backpackConfiguration;
+
+    let widthFromCenter = configuration.widthFromCenter;
+
+    let backpackWidth = configuration.dimensions.rows;
+    let backpackHeight = configuration.dimensions.columns;
 
     this.backpackLeft = centerPoint + widthFromCenter;
     this.groundLeft = centerPoint - widthFromCenter - backpackWidth * 50;
@@ -52,8 +56,8 @@ class App extends React.Component {
   buildItemState() {
     return [
       new ItemData(ShapeDefinition.LINE),
-      new ItemData(ShapeDefinition.SQUARE),
-      new ItemData(ShapeDefinition.L),
+      //new ItemData(ShapeDefinition.SQUARE),
+      //new ItemData(ShapeDefinition.L),
     ];
   }
 
