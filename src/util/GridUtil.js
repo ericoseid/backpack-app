@@ -9,8 +9,20 @@ let GridUtil = {
       for (let c = 0; c < gridState[0].length; c++) {
         let item = items[curItem];
 
-        if (GridUtil.checkFit(gridState, item.shapeDefinition, r, c)) {
-          GridUtil.fitShape(gridState, item.shapeDefinition, r, c);
+        if (
+          GridUtil.checkFit(
+            gridState,
+            item.itemDefinition.shapeDefinition,
+            r,
+            c
+          )
+        ) {
+          GridUtil.fitShape(
+            gridState,
+            item.itemDefinition.shapeDefinition,
+            r,
+            c
+          );
 
           item.position = new Position(
             grid.position.top + r * 50,
@@ -30,7 +42,7 @@ let GridUtil = {
   },
 
   checkFit: (gridState, shape, row, column) => {
-    for (let position of shape.definition) {
+    for (let position of shape.blockPositions) {
       let curRow = row + position.down;
       let curColumn = column + position.right;
 
@@ -61,7 +73,7 @@ let GridUtil = {
   },
 
   setValuesForShape: (gridState, shape, row, column, value) => {
-    for (let position of shape.definition) {
+    for (let position of shape.blockPositions) {
       gridState[row + position.down][column + position.right] = value;
     }
 

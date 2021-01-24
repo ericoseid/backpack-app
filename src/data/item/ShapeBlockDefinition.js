@@ -1,11 +1,7 @@
 class ShapeBlockDefinition {
-  constructor(down, right, borderTop, borderBottom, borderLeft, borderRight) {
+  constructor(down, right) {
     this.down = down;
     this.right = right;
-    this.borderTop = borderTop;
-    this.borderBottom = borderBottom;
-    this.borderLeft = borderLeft;
-    this.borderRight = borderRight;
   }
 }
 

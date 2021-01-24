@@ -1,13 +1,19 @@
 class ItemData {
-  constructor(shapeDefinition) {
+  constructor(itemDefinition) {
     this.position = null;
-    this.shapeDefinition = shapeDefinition;
+    this.itemDefinition = itemDefinition;
   }
 
   static ITEM_COMPARATOR = (a, b) => {
-    if (a.shapeDefinition.id < b.shapeDefinition.id) {
+    if (
+      a.itemDefinition.shapeDefinition.height <
+      b.itemDefinition.shapeDefinition.height
+    ) {
       return -1;
-    } else if (a.shapeDefinition.id > b.shapeDefinition.id) {
+    } else if (
+      a.itemDefinition.shapeDefinition.height >
+      b.itemDefinition.shapeDefinition.height
+    ) {
       return 1;
     } else {
       return 0;

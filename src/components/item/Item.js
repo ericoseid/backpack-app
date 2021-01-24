@@ -3,7 +3,6 @@ import ItemBlock from "./ItemBlock";
 import Position from "../../data/common/Position";
 import GridUtil from "../../util/GridUtil";
 import GridData from "../../data/grid/GridData";
-import sword from "../../assets/sword.png";
 
 class Item extends React.Component {
   constructor(props) {
@@ -159,7 +158,7 @@ class Item extends React.Component {
   }
 
   getUpperLeftGridCell(e) {
-    let itemBlockPosition = this.props.shapeDefinition.definition[
+    let itemBlockPosition = this.props.shapeDefinition.blockPositions[
       this.selectedBlock
     ];
 
@@ -187,11 +186,16 @@ class Item extends React.Component {
           position: "absolute",
           top: `${this.state.currentPostion.top}px`,
           left: `${this.state.currentPostion.left}px`,
-          zIndex: 1,
+          zIndex: this.selectedBlock !== null ? 2 : 1,
         }}
       >
-        <img src={sword} alt="" height="150px" width="50px" />
-        {this.props.shapeDefinition.definition.map((position, i) => (
+        <img
+          src={this.props.asset}
+          alt=""
+          height={`${this.props.shapeDefinition.height * 50}px`}
+          width={`${this.props.shapeDefinition.width * 50}px`}
+        />
+        {this.props.shapeDefinition.blockPositions.map((position, i) => (
           <div
             style={{
               position: "absolute",

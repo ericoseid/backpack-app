@@ -1,37 +1,43 @@
 import ShapeBlockDefinition from "./ShapeBlockDefinition";
 
 class ShapeDefinition {
-  constructor(definition, id) {
-    this.id = id;
-    this.definition = definition;
+  constructor(blockPositions) {
+    this.blockPositions = blockPositions;
+
+    let heightAccum = 1;
+    let widthAccum = 1;
+
+    this.blockPositions.forEach((position) => {
+      if (position.down >= heightAccum) heightAccum = position.down + 1;
+
+      if (position.right >= widthAccum) widthAccum = position.right + 1;
+    });
+
+    this.height = heightAccum;
+    this.width = widthAccum;
   }
 
-  static LINE = new ShapeDefinition(
-    [
-      new ShapeBlockDefinition(0, 0, true, false, true, true),
-      new ShapeBlockDefinition(1, 0, false, false, true, true),
-      new ShapeBlockDefinition(2, 0, false, true, true, true),
-    ],
-    0
-  );
-  static SQUARE = new ShapeDefinition(
-    [
-      new ShapeBlockDefinition(0, 0, true, false, true, false),
-      new ShapeBlockDefinition(0, 1, true, false, false, true),
-      new ShapeBlockDefinition(1, 0, false, true, true, false),
-      new ShapeBlockDefinition(1, 1, false, true, false, true),
-    ],
-    2
-  );
-  static L = new ShapeDefinition(
-    [
-      new ShapeBlockDefinition(0, 0, true, false, true, true),
-      new ShapeBlockDefinition(1, 0, false, false, true, true),
-      new ShapeBlockDefinition(2, 0, false, true, true, false),
-      new ShapeBlockDefinition(2, 1, true, true, false, true),
-    ],
-    1
-  );
+  static LINE = new ShapeDefinition([
+    new ShapeBlockDefinition(0, 0),
+    new ShapeBlockDefinition(1, 0),
+    new ShapeBlockDefinition(2, 0),
+  ]);
+  static TWO_LINE = new ShapeDefinition([
+    new ShapeBlockDefinition(0, 0),
+    new ShapeBlockDefinition(1, 0),
+  ]);
+  static SQUARE = new ShapeDefinition([
+    new ShapeBlockDefinition(0, 0),
+    new ShapeBlockDefinition(0, 1),
+    new ShapeBlockDefinition(1, 0),
+    new ShapeBlockDefinition(1, 1),
+  ]);
+  static L = new ShapeDefinition([
+    new ShapeBlockDefinition(0, 0),
+    new ShapeBlockDefinition(1, 0),
+    new ShapeBlockDefinition(2, 0),
+    new ShapeBlockDefinition(2, 1),
+  ]);
 }
 
 export default ShapeDefinition;

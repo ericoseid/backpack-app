@@ -3,11 +3,11 @@ import React from "react";
 import Position from "./data/common/Position";
 import ItemData from "./data/item/ItemData";
 import Item from "./components/item/Item";
-import ShapeDefinition from "./data/item/ShapeDefinition";
 import Grid from "./components/grid/Grid";
 import GridData from "./data/grid/GridData";
 import GridUtil from "./util/GridUtil";
 import getConfiguration from "./util/ConfigurationUtil";
+import ItemDefinition from "./data/item/ItemDefinition";
 
 class App extends React.Component {
   constructor(props) {
@@ -55,9 +55,9 @@ class App extends React.Component {
 
   buildItemState() {
     return [
-      new ItemData(ShapeDefinition.LINE),
-      //new ItemData(ShapeDefinition.SQUARE),
-      //new ItemData(ShapeDefinition.L),
+      new ItemData(ItemDefinition.SWORD),
+      new ItemData(ItemDefinition.SWORD),
+      new ItemData(ItemDefinition.TORCH),
     ];
   }
 
@@ -81,10 +81,11 @@ class App extends React.Component {
         {this.state.itemState.map((item) => (
           <Item
             restPosition={item.position}
-            shapeDefinition={item.shapeDefinition}
+            shapeDefinition={item.itemDefinition.shapeDefinition}
             backpackPosition={new Position(50, this.backpackLeft)}
             getGridState={this.getGridState}
             setGridState={this.setGridState}
+            asset={item.itemDefinition.asset}
           />
         ))}
         <Grid gridData={this.state.groundGrid} />
