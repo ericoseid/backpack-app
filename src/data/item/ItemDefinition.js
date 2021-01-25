@@ -1,5 +1,5 @@
 import shapeDefinition from "./ShapeDefinition";
-import { sword, torch, arrow } from "../../assets/Assets";
+import { sword, torch, arrow, bandage } from "../../assets/Assets";
 
 export default class ItemDefinition {
   constructor(shapeDefinition, asset) {
@@ -12,4 +12,6 @@ export default class ItemDefinition {
   static TORCH = new ItemDefinition(shapeDefinition.TWO_LINE, torch);
 
   static ARROW = new ItemDefinition(shapeDefinition.TWO_LINE, arrow);
+
+  static BANDAGE = new ItemDefinition(shapeDefinition.FLAT_TWO_LINE, bandage);
 }

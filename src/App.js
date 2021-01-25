@@ -59,6 +59,10 @@ class App extends React.Component {
       new ItemData(ItemDefinition.SWORD),
       new ItemData(ItemDefinition.TORCH),
       new ItemData(ItemDefinition.ARROW),
+      new ItemData(ItemDefinition.BANDAGE),
+      new ItemData(ItemDefinition.BANDAGE),
+      new ItemData(ItemDefinition.BANDAGE),
+      new ItemData(ItemDefinition.BANDAGE),
     ];
   }
 

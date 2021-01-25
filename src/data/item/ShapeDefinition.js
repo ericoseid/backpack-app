@@ -26,6 +26,10 @@ class ShapeDefinition {
     new ShapeBlockDefinition(0, 0),
     new ShapeBlockDefinition(1, 0),
   ]);
+  static FLAT_TWO_LINE = new ShapeDefinition([
+    new ShapeBlockDefinition(0, 0),
+    new ShapeBlockDefinition(0, 1),
+  ]);
   static SQUARE = new ShapeDefinition([
     new ShapeBlockDefinition(0, 0),
     new ShapeBlockDefinition(0, 1),
