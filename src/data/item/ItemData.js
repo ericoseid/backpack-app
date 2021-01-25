@@ -6,12 +6,12 @@ class ItemData {
 
   static ITEM_COMPARATOR = (a, b) => {
     if (
-      a.itemDefinition.shapeDefinition.height <
+      a.itemDefinition.shapeDefinition.height >
       b.itemDefinition.shapeDefinition.height
     ) {
       return -1;
     } else if (
-      a.itemDefinition.shapeDefinition.height >
+      a.itemDefinition.shapeDefinition.height <
       b.itemDefinition.shapeDefinition.height
     ) {
       return 1;

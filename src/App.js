@@ -58,6 +58,7 @@ class App extends React.Component {
       new ItemData(ItemDefinition.SWORD),
       new ItemData(ItemDefinition.SWORD),
       new ItemData(ItemDefinition.TORCH),
+      new ItemData(ItemDefinition.ARROW),
     ];
   }
 
