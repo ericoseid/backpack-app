@@ -63,6 +63,7 @@ class App extends React.Component {
       new ItemData(ItemDefinition.BANDAGE),
       new ItemData(ItemDefinition.BANDAGE),
       new ItemData(ItemDefinition.BANDAGE),
+      new ItemData(ItemDefinition.LOCKPICKS),
     ];
   }
 
